@@ -1,3 +1,13 @@
-<p>
-  users works!
-</p>
+<div class="row">
+  <div class="col-sm-2" *ngFor="let user of users$ | async">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{user.name}}</h5>
+        <p class="card-text">Username: {{user.username}}</p>
+        <p class="card-text">Email: {{user.email}}</p>
+        <button type="button" class="btn btn btn-secondary">Edit</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
