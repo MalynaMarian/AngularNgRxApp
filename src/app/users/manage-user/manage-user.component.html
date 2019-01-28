@@ -1,3 +1,35 @@
-<p>
-  manage-user works!
-</p>
+<div class="container-fluid">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        Add new customer
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputName">User</label>
+            <input type="text" name="name" class="form-control" id="exampleInputName" aria-describedby="userHelp"
+              placeholder="Enter user" required>
+            <small id="userHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputUserName">Username</label>
+            <input type="text" class="form-control" id="exampleInputUserName" aria-describedby="userNameHelp"
+              placeholder="Enter username" required>
+            <small id="userNameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+              required>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="row justify-content-center">
+            <button type="reset" class="btn btn-outline-secondary" routerLink="/users">Cancel</button>
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

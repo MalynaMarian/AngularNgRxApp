@@ -23,9 +23,7 @@ export class UsersComponent implements OnInit {
     this.userService.getAll();
   }
 
-  add(user: User) {
-    this.userService.add(user);
-  }
+
 
   delete(user: User) {
     this.userService.delete(user);

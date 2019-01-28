@@ -5,12 +5,14 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users/users.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { UserService } from './user.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [UsersComponent, ManageUserComponent],
   imports: [
     CommonModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    FormsModule
   ],
   providers: [UserService]
 })
