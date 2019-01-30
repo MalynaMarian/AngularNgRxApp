@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from 'src/app/models/user.model';
 import { Observable } from 'rxjs';
@@ -15,13 +15,14 @@ export class ManageUserComponent implements OnInit {
   typeOfButton: boolean;
   // user: User = new User;
 
-  constructor(private route: ActivatedRoute,
-    private userService: UserService) {
+  constructor(private routeActive: ActivatedRoute,
+    private userService: UserService,
+    private router: Router) {
     this.users$ = userService.entities$;
   }
 
   ngOnInit() {
-    this.route.params.subscribe(data => {
+    this.routeActive.params.subscribe(data => {
       if (data.id) {
         this.typeOfButton = true;
         this.user$ = this.userService.getByKey(data.id);
@@ -32,8 +33,14 @@ export class ManageUserComponent implements OnInit {
 
   }
 
-  add(user: User) {
+  addUser(user: User) {
     this.userService.add(user);
   }
 
+  goBack() {
+    this.router.navigate(['/users']);
+  }
+  onSubmit() {
+
+  }
 }
