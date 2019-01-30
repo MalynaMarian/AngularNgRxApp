@@ -23,8 +23,6 @@ export class UsersComponent implements OnInit {
     this.userService.getAll();
   }
 
-
-
   delete(user: User) {
     this.userService.delete(user);
   }
