@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from 'src/app/models/user.model';
-import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -12,27 +11,21 @@ import { NgForm } from '@angular/forms';
 })
 export class ManageUserComponent implements OnInit {
   @ViewChild('usersForm') form: NgForm;
-  users$: Observable<User[]>;
-  user$: Observable<User>;
-  typeOfButton: boolean;
   user: User = new User();
+  canEdit: boolean;
 
   constructor(private routeActive: ActivatedRoute,
     private userService: UserService,
     private router: Router) {
-    this.users$ = userService.entities$;
   }
 
   ngOnInit() {
     this.routeActive.params.subscribe(data => {
       if (data.id) {
-        this.typeOfButton = true;
-        this.user$ = this.userService.getByKey(data.id);
-      } else {
-
+        this.canEdit = true;
+        this.userService.getByKey(data.id).subscribe(state => this.user = state);
       }
     });
-
   }
 
   goBack() {
@@ -40,9 +33,11 @@ export class ManageUserComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
-    console.log(this.user);
-    this.userService.add(this.user);
+    if (this.canEdit) {
+      this.userService.update(this.user);
+    } else {
+      this.userService.add(this.user);
+    }
     this.form.reset();
   }
 }
