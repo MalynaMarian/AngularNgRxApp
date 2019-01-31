@@ -10,7 +10,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./manage-user.component.scss']
 })
 export class ManageUserComponent implements OnInit {
+
   @ViewChild('usersForm') form: NgForm;
+
   user: User = new User();
   canEdit: boolean;
 
