@@ -1,5 +1,5 @@
-import { UserState } from './user-store/state';
+import { UserStoreState } from './user-store';
 
 export interface State {
-  User: UserState;
+  User: UserStoreState.UserState;
 }

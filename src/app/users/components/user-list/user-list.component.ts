@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserStoreState } from 'src/app/app-store/user-store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-user-list',
@@ -8,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class UserListComponent implements OnInit {
   users = [1, 2, 3, 4, 5];
 
-  constructor() { }
+  constructor(private store: Store<UserStoreState.UserState>) { }
+
 
   ngOnInit() {
+    this.store.select('users').subscribe(state => console.log(state));
   }
 
 }

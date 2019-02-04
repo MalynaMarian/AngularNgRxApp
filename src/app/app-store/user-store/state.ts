@@ -10,5 +10,10 @@ export interface UserState {
 export const initialState: UserState = {
   loaded: false,
   loading: false,
-  users: []
+  users: [{
+    'id': 9,
+    'name': 'Glenna Reichert12',
+    'username': 'Delphine',
+    'email': 'Chaim_McDermott@dana.io'
+  }]
 };
