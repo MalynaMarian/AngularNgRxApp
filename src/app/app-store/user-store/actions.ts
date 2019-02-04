@@ -1,25 +1,38 @@
 import { Action } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
-
 import { User } from 'src/app/users/models/user.model';
 
 export enum UserActionTypes {
   LOAD_USERS = '[User] Load Users',
+  LOAD_USERS_SUCCESS = '[User] Load Users Success',
+
+  LOAD_USER = '[User] Load User',
+  LOAD_USER_SUCCESS = '[User] Load User Success',
+
   ADD_USER = '[User] Add User',
-  UPSERT_USER = '[User] Upsert User',
-  ADD_USERS = '[User] Add Users',
-  UPSERT_USERS = '[User] Upsert Users',
+  ADD_USER_SUCCESS = '[User] Add User Success',
+
   UPDATE_USER = '[User] Update User',
-  UPDATE_USERS = '[User] Update Users',
+  UPDATE_USER_SUCCESS = '[User] Update User Success',
+
   DELETE_USER = '[User] Delete User',
-  DELETE_USERS = '[User] Delete Users',
-  CLEAR_USERS = '[User] Clear Users',
+  DELETE_USER_SUCCESS = '[User] Delete User Success',
 }
 
 export class LoadUsers implements Action {
   readonly type = UserActionTypes.LOAD_USERS;
 
-  constructor(public payload: { users: User[] }) { }
+  constructor(public payload: User[]) { }
+}
+
+export class LoadUsersSuccess implements Action {
+  readonly type = UserActionTypes.LOAD_USERS_SUCCESS;
+
+  constructor(public payload: User[]) { }
+}
+export class LoadUser implements Action {
+  readonly type = UserActionTypes.LOAD_USER;
+
+  constructor(public payload: User) { }
 }
 
 export class AddUser implements Action {
@@ -28,34 +41,10 @@ export class AddUser implements Action {
   constructor(public payload: { user: User }) { }
 }
 
-export class UpsertUser implements Action {
-  readonly type = UserActionTypes.UPSERT_USER;
-
-  constructor(public payload: { user: User }) { }
-}
-
-export class AddUsers implements Action {
-  readonly type = UserActionTypes.ADD_USERS;
-
-  constructor(public payload: { users: User[] }) { }
-}
-
-export class UpsertUsers implements Action {
-  readonly type = UserActionTypes.UPSERT_USERS;
-
-  constructor(public payload: { users: User[] }) { }
-}
-
 export class UpdateUser implements Action {
   readonly type = UserActionTypes.UPDATE_USER;
 
-  constructor(public payload: { user: Update<User> }) { }
-}
-
-export class UpdateUsers implements Action {
-  readonly type = UserActionTypes.UPDATE_USERS;
-
-  constructor(public payload: { users: Update<User>[] }) { }
+  constructor(public payload: User) { }
 }
 
 export class DeleteUser implements Action {
@@ -64,24 +53,9 @@ export class DeleteUser implements Action {
   constructor(public payload: { id: string }) { }
 }
 
-export class DeleteUsers implements Action {
-  readonly type = UserActionTypes.DELETE_USERS;
-
-  constructor(public payload: { ids: string[] }) { }
-}
-
-export class ClearUsers implements Action {
-  readonly type = UserActionTypes.CLEAR_USERS;
-}
-
-export type UserActionsUnion =
+export type UserActions =
   | LoadUsers
+  | LoadUser
   | AddUser
-  | UpsertUser
-  | AddUsers
-  | UpsertUsers
   | UpdateUser
-  | UpdateUsers
-  | DeleteUser
-  | DeleteUsers
-  | ClearUsers;
+  | DeleteUser;
