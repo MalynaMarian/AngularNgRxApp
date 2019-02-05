@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { State } from 'src/app/app-store/app-state';
+import { AddUser } from 'src/app/app-store/user-store/actions';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -7,9 +14,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddEditUserComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('usersForm') form: NgForm;
+  user: User = new User();
+
+  constructor(private routeActive: ActivatedRoute,
+    private store: Store<State>) { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    this.store.dispatch(new AddUser(this.user));
+    this.form.reset();
+  }
 }

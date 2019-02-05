@@ -15,11 +15,24 @@ export class UserStoreEffects {
   @Effect()
   loadUsers = this.actions$
     .pipe(
-      ofType(fromActions.UserActionTypes.LOAD_USERS),
+      ofType<fromActions.LoadUsers>(fromActions.UserActionTypes.LOAD_USERS),
       mergeMap(() => this.service.getUsers()
         .pipe(
           map(users => new fromActions.LoadUsersSuccess(users)),
           catchError(() => EMPTY)
-        ))
+        )
+      )
+    );
+
+  @Effect()
+  addUser$ = this.actions$
+    .pipe(
+      ofType<fromActions.AddUser>(fromActions.UserActionTypes.ADD_USER),
+      mergeMap(action => this.service.createUser(action.payload)
+        .pipe(
+          map(user => new fromActions.AddUserSuccess(user),
+            catchError(() => EMPTY))
+        )
+      )
     );
 }
