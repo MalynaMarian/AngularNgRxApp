@@ -24,36 +24,40 @@ export class LoadUsers implements Action {
 
 export class LoadUsersSuccess implements Action {
   readonly type = UserActionTypes.LOAD_USERS_SUCCESS;
-
   constructor(public payload: User[]) { }
 }
 
 export class AddUser implements Action {
   readonly type = UserActionTypes.ADD_USER;
-
   constructor(public payload: User) { }
 }
 
 export class AddUserSuccess implements Action {
   readonly type = UserActionTypes.ADD_USER_SUCCESS;
-
   constructor(public payload: User) { }
 }
 export class UpdateUser implements Action {
   readonly type = UserActionTypes.UPDATE_USER;
+  constructor(public payload: User) { }
+}
 
+export class UpdateUserSuccess implements Action {
+  readonly type = UserActionTypes.UPDATE_USER_SUCCESS;
   constructor(public payload: User) { }
 }
 
 export class DeleteUser implements Action {
   readonly type = UserActionTypes.DELETE_USER;
-
-  constructor(public payload: { id: string }) { }
+  constructor(public payload: string) { }
 }
 
 export class LoadUser implements Action {
   readonly type = UserActionTypes.LOAD_USER;
+  constructor(public payload: string) { }
+}
 
+export class LoadUserSuccess implements Action {
+  readonly type = UserActionTypes.LOAD_USER_SUCCESS;
   constructor(public payload: User) { }
 }
 
@@ -63,5 +67,7 @@ export type UserActions =
   | AddUser
   | AddUserSuccess
   | UpdateUser
+  | UpdateUserSuccess
   | DeleteUser
-  | LoadUser;
+  | LoadUser
+  | LoadUserSuccess;

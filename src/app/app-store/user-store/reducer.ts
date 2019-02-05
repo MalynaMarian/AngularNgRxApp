@@ -15,9 +15,22 @@ export function userReducer(state = initialState, action: UserActions): UserStat
     }
     case UserActionTypes.ADD_USER_SUCCESS: {
       const user = action.payload;
-      console.log(user);
       state.users.push(user);
       return { ...state, loading: false, loaded: true };
+    }
+    case UserActionTypes.LOAD_USER: {
+      return { ...state, loading: true, loaded: false };
+    }
+    case UserActionTypes.LOAD_USER_SUCCESS: {
+      const user = action.payload;
+      return { ...state, user, loading: false, loaded: true };
+    }
+    case UserActionTypes.UPDATE_USER: {
+      return { ...state, loading: true, loaded: false };
+    }
+    case UserActionTypes.UPDATE_USER_SUCCESS: {
+      const user = action.payload;
+      return { ...state, user, loading: false, loaded: true };
     }
     default: {
       return state;
