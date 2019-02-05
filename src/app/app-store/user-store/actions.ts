@@ -20,8 +20,6 @@ export enum UserActionTypes {
 
 export class LoadUsers implements Action {
   readonly type = UserActionTypes.LOAD_USERS;
-
-  constructor(public payload: User[]) { }
 }
 
 export class LoadUsersSuccess implements Action {
@@ -55,6 +53,7 @@ export class DeleteUser implements Action {
 
 export type UserActions =
   | LoadUsers
+  | LoadUsersSuccess
   | LoadUser
   | AddUser
   | UpdateUser

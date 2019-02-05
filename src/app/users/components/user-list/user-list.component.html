@@ -2,12 +2,12 @@
   <div class="col-md-4" *ngFor="let user of users">
     <div class="card mb-4 box-shadow">
       <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Marian Malyna</h4>
+        <h4 class="my-0 font-weight-normal">{{user.name}}</h4>
       </div>
       <div class="card-body">
         <ul class="list-unstyled mt-3 mb-4">
-          <li>Email: malina.marian@gmail.com</li>
-          <li>Username: mmaly</li>
+          <li>Email: {{user.email}}</li>
+          <li>Username: {{user.username}}</li>
         </ul>
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">

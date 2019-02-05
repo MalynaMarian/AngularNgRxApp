@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserStoreState } from 'src/app/app-store/user-store';
 import { Store } from '@ngrx/store';
+import { LoadUsers } from 'src/app/app-store/user-store/actions';
+import { Observable } from 'rxjs';
+import { State } from 'src/app/app-store/app-state';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -8,13 +11,16 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  users = [1, 2, 3, 4, 5];
+  users: User[] = [];
 
-  constructor(private store: Store<UserStoreState.UserState>) { }
+  constructor(private store: Store<State>) { }
 
 
   ngOnInit() {
-    this.store.select('users').subscribe(state => console.log(state));
+    this.store.dispatch(new LoadUsers());
+    this.store.select('user').subscribe(state => {
+      this.users = state.users;
+    });
   }
 
 }
