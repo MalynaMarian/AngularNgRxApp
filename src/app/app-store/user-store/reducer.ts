@@ -32,6 +32,14 @@ export function userReducer(state = initialState, action: UserActions): UserStat
       const user = action.payload;
       return { ...state, user, loading: false, loaded: true };
     }
+    case UserActionTypes.DELETE_USER: {
+      return { ...state, loading: true, loaded: false };
+    }
+    case UserActionTypes.DELETE_USER_SUCCESS: {
+      const userId = action.payload;
+      state.users = state.users.filter(el => el.id !== +userId);
+      return { ...state, loading: false, loaded: true };
+    }
     default: {
       return state;
     }

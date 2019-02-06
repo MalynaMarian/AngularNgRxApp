@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { Observable, of as observableOf, EMPTY, from } from 'rxjs';
+import { of as observableOf, EMPTY } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { UserService } from 'src/app/users/services/user.service';
 import * as fromActions from './actions';
@@ -30,8 +29,8 @@ export class UserStoreEffects {
       ofType<fromActions.AddUser>(fromActions.UserActionTypes.ADD_USER),
       mergeMap(action => this.service.createUser(action.payload)
         .pipe(
-          map(user => new fromActions.AddUserSuccess(user),
-            catchError(() => EMPTY))
+          map(user => new fromActions.AddUserSuccess(user)),
+          catchError(() => EMPTY)
         )
       )
     );
@@ -42,8 +41,8 @@ export class UserStoreEffects {
       ofType<fromActions.LoadUser>(fromActions.UserActionTypes.LOAD_USER),
       mergeMap(action => this.service.getUser(action.payload)
         .pipe(
-          map(user => new fromActions.LoadUserSuccess(user),
-            catchError(() => EMPTY))
+          map(user => new fromActions.LoadUserSuccess(user)),
+          catchError(() => EMPTY)
         )
       )
     );
@@ -54,8 +53,20 @@ export class UserStoreEffects {
       ofType<fromActions.UpdateUser>(fromActions.UserActionTypes.UPDATE_USER),
       mergeMap(action => this.service.putUser(action.payload)
         .pipe(
-          map(user => new fromActions.UpdateUserSuccess(user),
-            catchError(() => EMPTY))
+          map(user => new fromActions.UpdateUserSuccess(user)),
+          catchError(() => EMPTY)
+        )
+      )
+    );
+
+  @Effect()
+  deleteUser$ = this.actions$
+    .pipe(
+      ofType<fromActions.DeleteUser>(fromActions.UserActionTypes.DELETE_USER),
+      mergeMap(action => this.service.deleteUser(action.payload)
+        .pipe(
+          map(_ => new fromActions.DeleteUserSuccess(action.payload)),
+          catchError(() => EMPTY)
         )
       )
     );

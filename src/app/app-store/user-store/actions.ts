@@ -5,6 +5,9 @@ export enum UserActionTypes {
   LOAD_USERS = '[User] Load Users',
   LOAD_USERS_SUCCESS = '[User] Load Users Success',
 
+  LOAD_USER = '[User] Load User',
+  LOAD_USER_SUCCESS = '[User] Load User Success',
+
   ADD_USER = '[User] Add User',
   ADD_USER_SUCCESS = '[User] Add User Success',
 
@@ -12,10 +15,7 @@ export enum UserActionTypes {
   UPDATE_USER_SUCCESS = '[User] Update User Success',
 
   DELETE_USER = '[User] Delete User',
-  DELETE_USER_SUCCESS = '[User] Delete User Success',
-
-  LOAD_USER = '[User] Load User',
-  LOAD_USER_SUCCESS = '[User] Load User Success',
+  DELETE_USER_SUCCESS = '[User] Delete User Success'
 }
 
 export class LoadUsers implements Action {
@@ -25,6 +25,16 @@ export class LoadUsers implements Action {
 export class LoadUsersSuccess implements Action {
   readonly type = UserActionTypes.LOAD_USERS_SUCCESS;
   constructor(public payload: User[]) { }
+}
+
+export class LoadUser implements Action {
+  readonly type = UserActionTypes.LOAD_USER;
+  constructor(public payload: string) { }
+}
+
+export class LoadUserSuccess implements Action {
+  readonly type = UserActionTypes.LOAD_USER_SUCCESS;
+  constructor(public payload: User) { }
 }
 
 export class AddUser implements Action {
@@ -51,23 +61,19 @@ export class DeleteUser implements Action {
   constructor(public payload: string) { }
 }
 
-export class LoadUser implements Action {
-  readonly type = UserActionTypes.LOAD_USER;
+export class DeleteUserSuccess implements Action {
+  readonly type = UserActionTypes.DELETE_USER_SUCCESS;
   constructor(public payload: string) { }
-}
-
-export class LoadUserSuccess implements Action {
-  readonly type = UserActionTypes.LOAD_USER_SUCCESS;
-  constructor(public payload: User) { }
 }
 
 export type UserActions =
   | LoadUsers
   | LoadUsersSuccess
+  | LoadUser
+  | LoadUserSuccess
   | AddUser
   | AddUserSuccess
   | UpdateUser
   | UpdateUserSuccess
   | DeleteUser
-  | LoadUser
-  | LoadUserSuccess;
+  | DeleteUserSuccess;

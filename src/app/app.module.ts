@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppStoreModule } from './app-store/app-store.module';
-import { AppComponent } from './app.component';
-import { UserService } from './users/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+
+import { UserService } from './users/services/user.service';
+
+import { AppComponent } from './app.component';
 
 
 @NgModule({
@@ -21,4 +23,5 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [UserService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

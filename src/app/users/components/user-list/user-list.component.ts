@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LoadUsers } from 'src/app/app-store/user-store/actions';
-import { Observable } from 'rxjs';
+import { LoadUsers, DeleteUser } from 'src/app/app-store/user-store/actions';
 import { State } from 'src/app/app-store/app-state';
 import { User } from '../../models/user.model';
 
@@ -15,7 +14,6 @@ export class UserListComponent implements OnInit {
 
   constructor(private store: Store<State>) { }
 
-
   ngOnInit() {
     this.store.dispatch(new LoadUsers());
     this.store.select('user').subscribe(state => {
@@ -23,4 +21,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  delete(id) {
+    this.store.dispatch(new DeleteUser(id));
+  }
 }
